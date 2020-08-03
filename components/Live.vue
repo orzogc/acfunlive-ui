@@ -19,7 +19,7 @@
           style="position: absolute; right: 30px;"
           @click="stopRecord(live.UID)"
         >
-          停止下载
+          停止录播
         </el-button>
         <el-button
           v-else-if="live.isLive"

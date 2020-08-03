@@ -3,9 +3,19 @@
     <el-checkbox v-model="notify" label="开播提醒" @change="changeNotify" />
     <el-checkbox v-model="record" label="自动录播" @change="changeRecord" />
     <el-checkbox v-model="danmu" label="自动下载弹幕" @change="changeDanmu" />
-    <el-button size="small" style="position: absolute; right: 30px;" @click="deleteLive">
+    <el-button
+      size="small"
+      style="position: absolute; right: 30px;"
+      @click="deleteDialog = true"
+    >
       删除主播
     </el-button>
+    <el-dialog :visible.sync="deleteDialog" width="20%">
+      确定删除 {{ config.Name }}（{{ config.UID }}） 的设置？
+      <span slot="footer">
+        <el-button type="primary" @click="deleteLive">确定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -25,7 +35,8 @@ export default {
     return {
       notify: this.config.Notify.NotifyOn,
       record: this.config.Record,
-      danmu: this.config.Danmu
+      danmu: this.config.Danmu,
+      deleteDialog: false
     }
   },
   watch: {
@@ -82,6 +93,7 @@ export default {
       }
     },
     async deleteLive () {
+      this.deleteDialog = false
       if (this.config.isRecord) {
         this.stopRec(this.config.UID)
       }
