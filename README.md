@@ -14,6 +14,6 @@ $ yarn build
 # generate static project
 $ yarn generate
 
-# open the page
+# serve the page at localhost:3000
 $ yarn start
 ```

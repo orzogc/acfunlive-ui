@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="订阅主播" :visible.sync="show" width="35%">
+  <el-dialog title="订阅主播" :visible.sync="show" width="30%">
     <div>
       <el-input v-model="inputUID" placeholder="请输入主播uid" style="width: 50%" />
       <span v-if="warn" style="color: red">请输入一个大于0的整数</span>
