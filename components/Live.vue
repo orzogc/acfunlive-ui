@@ -17,7 +17,7 @@
           v-if="live.isRecord"
           size="small"
           style="position: absolute; right: 30px;"
-          @click="stopRecord(live.UID)"
+          @click="currentLive = live; stopDialog = true;"
         >
           停止录播
         </el-button>
@@ -32,6 +32,12 @@
       </template>
       <LiveConfig :config="live" :stop-rec="stopRecord" />
     </el-collapse-item>
+    <el-dialog :visible.sync="stopDialog" width="20%">
+      确定停止 {{ currentLive.Name }}（{{ currentLive.UID }}） 的录播？
+      <span slot="footer">
+        <el-button type="primary" @click="stopRecord(currentLive.UID)">确定</el-button>
+      </span>
+    </el-dialog>
   </el-collapse>
 </template>
 
@@ -40,7 +46,9 @@ export default {
   data () {
     return {
       lives: [],
-      timer: ''
+      timer: '',
+      stopDialog: false,
+      currentLive: {}
     }
   },
   created () {
@@ -98,6 +106,7 @@ export default {
       }
     },
     async stopRecord (uid) {
+      this.stopDialog = false
       const result = await fetch('http://127.0.0.1:51880/stoprecord/' + uid)
         .then(resp => resp.json())
         .catch(e => console.error(e))
