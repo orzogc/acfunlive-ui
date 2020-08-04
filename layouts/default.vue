@@ -28,7 +28,7 @@ html {
 }
 
 body {
-  width: 1024px;
+  max-width: 1024px;
   margin: auto;
 }
 </style>

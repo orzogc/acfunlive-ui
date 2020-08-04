@@ -1,21 +1,18 @@
 <template>
-  <div>
+  <div style="position: relative; top: 8px;">
     <el-checkbox v-model="notify" label="开播提醒" @change="changeNotify" />
     <el-checkbox v-model="record" label="自动录播" @change="changeRecord" />
     <el-checkbox v-model="danmu" label="自动下载弹幕" @change="changeDanmu" />
-    <el-button
-      size="small"
-      style="position: absolute; right: 30px;"
-      @click="deleteDialog = true"
+    <el-popconfirm
+      icon="el-icon-info"
+      icon-color="red"
+      :title="'确定删除' + config.Name + '（' + config.UID + '）的设置？'"
+      @onConfirm="deleteLive"
     >
-      删除主播
-    </el-button>
-    <el-dialog :visible.sync="deleteDialog" width="20%">
-      确定删除 {{ config.Name }}（{{ config.UID }}） 的设置？
-      <span slot="footer">
-        <el-button type="primary" @click="deleteLive">确定</el-button>
-      </span>
-    </el-dialog>
+      <el-button slot="reference" size="small" style="position: absolute; right: 30px;">
+        删除主播
+      </el-button>
+    </el-popconfirm>
   </div>
 </template>
 

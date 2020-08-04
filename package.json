@@ -6,6 +6,10 @@
     "acfun",
     "acfunlive"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orzogc/acfunlive-ui.git"
+  },
   "license": "GPL-3.0",
   "scripts": {
     "dev": "nuxt",
