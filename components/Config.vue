@@ -5,6 +5,14 @@
     </el-button>
     <LiveConfigDialog :show-dialog="liveDialog" @hideDialog="liveDialog = false" />
     <el-divider />
+    <el-link
+      type="primary"
+      href="http://localhost:51880/log"
+      target="_blank"
+      style="margin-left: 50px"
+    >
+      显示日志
+    </el-link>
   </div>
 </template>
 

@@ -55,13 +55,13 @@ export default {
   },
   methods: {
     async getLive () {
-      let l = await fetch('http://127.0.0.1:51880/liststreamer')
+      let l = await fetch('http://localhost:51880/liststreamer')
         .then(resp => resp.json())
         .catch(e => console.error(e)) || []
-      const living = await fetch('http://127.0.0.1:51880/listlive')
+      const living = await fetch('http://localhost:51880/listlive')
         .then(resp => resp.json())
         .catch(e => console.error(e)) || []
-      const recording = await fetch('http://127.0.0.1:51880/listrecord')
+      const recording = await fetch('http://localhost:51880/listrecord')
         .then(resp => resp.json())
         .catch(e => console.error(e)) || []
       l = l.map(function (live) {
@@ -91,7 +91,7 @@ export default {
       clearInterval(this.timer)
     },
     async startRecord (uid) {
-      const result = await fetch('http://127.0.0.1:51880/startrecdan/' + uid)
+      const result = await fetch('http://localhost:51880/startrecdan/' + uid)
         .then(resp => resp.json())
         .catch(e => console.error(e))
       if (result !== true) {
@@ -99,8 +99,7 @@ export default {
       }
     },
     async stopRecord (uid) {
-      this.stopDialog = false
-      const result = await fetch('http://127.0.0.1:51880/stoprecord/' + uid)
+      const result = await fetch('http://localhost:51880/stoprecord/' + uid)
         .then(resp => resp.json())
         .catch(e => console.error(e))
       if (result !== true) {

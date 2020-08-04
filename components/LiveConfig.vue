@@ -32,8 +32,7 @@ export default {
     return {
       notify: this.config.Notify.NotifyOn,
       record: this.config.Record,
-      danmu: this.config.Danmu,
-      deleteDialog: false
+      danmu: this.config.Danmu
     }
   },
   watch: {
@@ -47,11 +46,11 @@ export default {
     async changeNotify (checked) {
       let result = ''
       if (checked) {
-        result = await fetch('http://127.0.0.1:51880/addnotify/' + this.config.UID)
+        result = await fetch('http://localhost:51880/addnotify/' + this.config.UID)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       } else {
-        result = await fetch('http://127.0.0.1:51880/delnotify/' + this.config.UID)
+        result = await fetch('http://localhost:51880/delnotify/' + this.config.UID)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
@@ -62,11 +61,11 @@ export default {
     async changeRecord (checked) {
       let result = ''
       if (checked) {
-        result = await fetch('http://127.0.0.1:51880/addrecord/' + this.config.UID)
+        result = await fetch('http://localhost:51880/addrecord/' + this.config.UID)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       } else {
-        result = await fetch('http://127.0.0.1:51880/delrecord/' + this.config.UID)
+        result = await fetch('http://localhost:51880/delrecord/' + this.config.UID)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
@@ -77,11 +76,11 @@ export default {
     async changeDanmu (checked) {
       let result = ''
       if (checked) {
-        result = await fetch('http://127.0.0.1:51880/adddanmu/' + this.config.UID)
+        result = await fetch('http://localhost:51880/adddanmu/' + this.config.UID)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       } else {
-        result = await fetch('http://127.0.0.1:51880/deldanmu/' + this.config.UID)
+        result = await fetch('http://localhost:51880/deldanmu/' + this.config.UID)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
@@ -90,11 +89,10 @@ export default {
       }
     },
     async deleteLive () {
-      this.deleteDialog = false
       if (this.config.isRecord) {
         this.stopRec(this.config.UID)
       }
-      const result = await fetch('http://127.0.0.1:51880/delconfig/' + this.config.UID)
+      const result = await fetch('http://localhost:51880/delconfig/' + this.config.UID)
         .then(resp => resp.json())
         .catch(e => console.error(e))
       if (result !== true) {
