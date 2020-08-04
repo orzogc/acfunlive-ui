@@ -13,31 +13,26 @@
           {{ live.Title }}
         </el-link>
         <span v-if="live.isRecord" style="color: red">（正在录播）</span>
-        <el-button
-          v-if="live.isRecord"
-          size="small"
-          style="position: absolute; right: 30px;"
-          @click="currentLive = live; stopDialog = true;"
-        >
-          停止录播
-        </el-button>
-        <el-button
-          v-else-if="live.isLive"
-          size="small"
-          style="position: absolute; right: 30px;"
-          @click="startRecord(live.UID)"
-        >
-          启动录播
-        </el-button>
+        <span v-if="live.isRecord" style="position: absolute; right: 30px;">
+          <el-popconfirm
+            icon="el-icon-info"
+            icon-color="red"
+            :title="'确定停止 ' + live.Name + '（' + live.UID + '） 的录播？'"
+            @onConfirm="stopRecord(live.UID)"
+          >
+            <el-button slot="reference" size="small">
+              停止录播
+            </el-button>
+          </el-popconfirm>
+        </span>
+        <span v-else-if="live.isLive" style="position: absolute; right: 30px;">
+          <el-button size="small" @click="startRecord(live.UID)">
+            启动录播
+          </el-button>
+        </span>
       </template>
       <LiveConfig :config="live" :stop-rec="stopRecord" />
     </el-collapse-item>
-    <el-dialog :visible.sync="stopDialog" width="20%">
-      确定停止 {{ currentLive.Name }}（{{ currentLive.UID }}） 的录播？
-      <span slot="footer">
-        <el-button type="primary" @click="stopRecord(currentLive.UID)">确定</el-button>
-      </span>
-    </el-dialog>
   </el-collapse>
 </template>
 
@@ -46,9 +41,7 @@ export default {
   data () {
     return {
       lives: [],
-      timer: '',
-      stopDialog: false,
-      currentLive: {}
+      timer: ''
     }
   },
   created () {

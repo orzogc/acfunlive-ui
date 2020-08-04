@@ -6,7 +6,7 @@
     <el-popconfirm
       icon="el-icon-info"
       icon-color="red"
-      :title="'确定删除' + config.Name + '（' + config.UID + '）的设置？'"
+      :title="'确定删除 ' + config.Name + '（' + config.UID + '） 的设置？'"
       @onConfirm="deleteLive"
     >
       <el-button slot="reference" size="small" style="position: absolute; right: 30px;">
