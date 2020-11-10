@@ -59,7 +59,7 @@ export default {
       this.show = false
       let result = true
       if (this.notify) {
-        result = result && await fetch('http://localhost:51880/addnotify/' + uid)
+        result = result && await fetch('http://localhost:51880/addnotifyon/' + uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }

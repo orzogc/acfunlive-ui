@@ -6,7 +6,7 @@
     <el-popconfirm
       icon="el-icon-info"
       icon-color="red"
-      :title="'确定删除 ' + config.Name + '（' + config.UID + '） 的设置？'"
+      :title="'确定删除 ' + config.name + '（' + config.uid + '） 的设置？'"
       @onConfirm="deleteLive"
     >
       <el-button slot="reference" size="small" style="position: absolute; right: 30px;">
@@ -30,27 +30,27 @@ export default {
   },
   data () {
     return {
-      notify: this.config.Notify.NotifyOn,
-      record: this.config.Record,
-      danmu: this.config.Danmu
+      notify: this.config.notify.notifyOn,
+      record: this.config.record,
+      danmu: this.config.danmu
     }
   },
   watch: {
     config (val, oldVal) {
-      this.notify = this.config.Notify.NotifyOn
-      this.record = this.config.Record
-      this.danmu = this.config.Danmu
+      this.notify = this.config.notify.notifyOn
+      this.record = this.config.record
+      this.danmu = this.config.danmu
     }
   },
   methods: {
     async changeNotify (checked) {
       let result = ''
       if (checked) {
-        result = await fetch('http://localhost:51880/addnotify/' + this.config.UID)
+        result = await fetch('http://localhost:51880/addnotifyon/' + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       } else {
-        result = await fetch('http://localhost:51880/delnotify/' + this.config.UID)
+        result = await fetch('http://localhost:51880/delnotifyon/' + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
@@ -61,11 +61,11 @@ export default {
     async changeRecord (checked) {
       let result = ''
       if (checked) {
-        result = await fetch('http://localhost:51880/addrecord/' + this.config.UID)
+        result = await fetch('http://localhost:51880/addrecord/' + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       } else {
-        result = await fetch('http://localhost:51880/delrecord/' + this.config.UID)
+        result = await fetch('http://localhost:51880/delrecord/' + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
@@ -76,11 +76,11 @@ export default {
     async changeDanmu (checked) {
       let result = ''
       if (checked) {
-        result = await fetch('http://localhost:51880/adddanmu/' + this.config.UID)
+        result = await fetch('http://localhost:51880/adddanmu/' + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       } else {
-        result = await fetch('http://localhost:51880/deldanmu/' + this.config.UID)
+        result = await fetch('http://localhost:51880/deldanmu/' + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
@@ -90,9 +90,9 @@ export default {
     },
     async deleteLive () {
       if (this.config.isRecord) {
-        this.stopRec(this.config.UID)
+        this.stopRec(this.config.uid)
       }
-      const result = await fetch('http://localhost:51880/delconfig/' + this.config.UID)
+      const result = await fetch('http://localhost:51880/delconfig/' + this.config.uid)
         .then(resp => resp.json())
         .catch(e => console.error(e))
       if (result !== true) {
