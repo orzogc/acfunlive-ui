@@ -18,7 +18,7 @@
             icon="el-icon-info"
             icon-color="red"
             :title="'确定停止 ' + live.name + '（' + live.uid + '） 的录播？'"
-            @onConfirm="stopRecord(live.uid)"
+            @confirm="stopRecord(live.uid)"
           >
             <el-button slot="reference" size="small">
               停止录播
@@ -71,6 +71,7 @@ export default {
             live.title = v.title
             live.url = v.url
           }
+          return v
         })
         live.isRecord = recording.filter(v => v.uid === live.uid).length > 0
         return live

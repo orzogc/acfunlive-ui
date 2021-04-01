@@ -7,7 +7,7 @@
       icon="el-icon-info"
       icon-color="red"
       :title="'确定删除 ' + config.name + '（' + config.uid + '） 的设置？'"
-      @onConfirm="deleteLive"
+      @confirm="deleteLive"
     >
       <el-button slot="reference" size="small" style="position: absolute; right: 30px;">
         删除主播
