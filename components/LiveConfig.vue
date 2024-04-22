@@ -32,7 +32,8 @@ export default {
     return {
       notify: this.config.notify.notifyOn,
       record: this.config.record,
-      danmu: this.config.danmu
+      danmu: this.config.danmu,
+      hostname: location.hostname
     }
   },
   watch: {
@@ -46,11 +47,11 @@ export default {
     async changeNotify (checked) {
       let result = ''
       if (checked) {
-        result = await fetch('http://localhost:51880/addnotifyon/' + this.config.uid)
+        result = await fetch(`http://${this.hostname}:51880/addnotifyon/` + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       } else {
-        result = await fetch('http://localhost:51880/delnotifyon/' + this.config.uid)
+        result = await fetch(`http://${this.hostname}:51880/delnotifyon/` + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
@@ -61,11 +62,11 @@ export default {
     async changeRecord (checked) {
       let result = ''
       if (checked) {
-        result = await fetch('http://localhost:51880/addrecord/' + this.config.uid)
+        result = await fetch(`http://${this.hostname}:51880/addrecord/` + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       } else {
-        result = await fetch('http://localhost:51880/delrecord/' + this.config.uid)
+        result = await fetch(`http://${this.hostname}:51880/delrecord/` + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
@@ -76,11 +77,11 @@ export default {
     async changeDanmu (checked) {
       let result = ''
       if (checked) {
-        result = await fetch('http://localhost:51880/adddanmu/' + this.config.uid)
+        result = await fetch(`http://${this.hostname}:51880/adddanmu/` + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       } else {
-        result = await fetch('http://localhost:51880/deldanmu/' + this.config.uid)
+        result = await fetch(`http://${this.hostname}:51880/deldanmu/` + this.config.uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
@@ -92,7 +93,7 @@ export default {
       if (this.config.isRecord) {
         this.stopRec(this.config.uid)
       }
-      const result = await fetch('http://localhost:51880/delconfig/' + this.config.uid)
+      const result = await fetch(`http://${this.hostname}:51880/delconfig/` + this.config.uid)
         .then(resp => resp.json())
         .catch(e => console.error(e))
       if (result !== true) {
