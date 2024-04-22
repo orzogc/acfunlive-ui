@@ -29,7 +29,8 @@ export default {
       notify: true,
       record: false,
       danmu: false,
-      warn: false
+      warn: false,
+      hostname: location.hostname
     }
   },
   computed: {
@@ -59,17 +60,17 @@ export default {
       this.show = false
       let result = true
       if (this.notify) {
-        result = result && await fetch('http://localhost:51880/addnotifyon/' + uid)
+        result = result && await fetch(`http://${this.hostname}:51880/addnotifyon/` + uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
       if (this.record) {
-        result = result && await fetch('http://localhost:51880/addrecord/' + uid)
+        result = result && await fetch(`http://${this.hostname}:51880/addrecord/` + uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }
       if (this.danmu) {
-        result = result && await fetch('http://localhost:51880/adddanmu/' + uid)
+        result = result && await fetch(`http://${this.hostname}:51880/adddanmu/` + uid)
           .then(resp => resp.json())
           .catch(e => console.error(e))
       }

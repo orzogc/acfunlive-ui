@@ -7,7 +7,7 @@
     <el-divider />
     <el-link
       type="primary"
-      href="http://localhost:51880/log"
+      :href="href"
       target="_blank"
       style="margin-left: 50px"
     >
@@ -20,7 +20,8 @@
 export default {
   data () {
     return {
-      liveDialog: false
+      liveDialog: false,
+      href: `http://${location.hostname}:51880/log`
     }
   }
 }
