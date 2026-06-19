@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "element-ui": "^2.15.14",
-    "nuxt": "^2.18.1"
+    "nuxt": "^3.21.7"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.25.1",
